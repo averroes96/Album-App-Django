@@ -7,6 +7,13 @@ def gallery(request):
     
     categories = Category.objects.all()
     photos = Photo.objects.all()
+
+    if request.method == "GET":
+        category = request.GET.get("category")
+
+        if(category != None):
+            photos = Photo.objects.filter(category__name=category)
+
     context = {
         "categories" : categories,
         "photos" : photos
